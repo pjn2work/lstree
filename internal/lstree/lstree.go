@@ -41,6 +41,19 @@ func (fdr *FileData) searchForFiles(baseFolder string, ff *fileFilters) listFile
     return fdr.subFileData
 }
 
+func fillWith(char string, n int) string {
+    res := ""
+    for ; n > 0; n-- {
+        res += char
+    }
+    return res
+}
+
+func getStringLen(str string) int {
+    r := []rune(str)
+    return len(r)
+}
+
 func (fdr *FileData) printListDir(prev string) {
     total := len(fdr.subFileData) - 1
     next, curr := prev+"│   ", "├── "
@@ -54,7 +67,9 @@ func (fdr *FileData) printListDir(prev string) {
             fmt.Printf("%s%s%s%s%s\n", prev, curr, fd.color, fd.fileName, Reset)
             fd.printListDir(next)
         } else {
-            fmt.Printf("%s%s%s%-40s%s | %s | %d\n", prev, curr, fd.color, fd.fileName, Reset, fd.modTime, fd.size)
+            output := fmt.Sprintf("%s%s%s%s%s", prev, curr, fd.color, fd.fileName, Reset)
+            fillN := 95 - getStringLen(output)
+            fmt.Printf("%s %s | %s | %9d\n", output, fillWith("-", fillN), fd.modTime, fd.size)
         }
     }
 
