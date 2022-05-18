@@ -1,6 +1,6 @@
-package lstree
+package utils
 
-func fillWith(char string, n int) string {
+func FillWith(char string, n int) string {
     res := ""
     for ; n > 0; n-- {
         res += char
@@ -8,7 +8,7 @@ func fillWith(char string, n int) string {
     return res
 }
 
-func getStringLen(str string) int {
+func GetStringLen(str string) int {
     r := []rune(str)
     return len(r)
 }

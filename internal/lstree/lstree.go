@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"sort"
+
+    "github.com/pjn2work/lstree/pkg/utils"
 )
 
-const ScreenFileSpacing = 110
+const screenFileSpacing = 110
 
 func (fdr *FileData) searchForFiles(baseFolder string, ff *fileFilters) listFileData {
     files, _ := ioutil.ReadDir(baseFolder)
@@ -57,8 +59,8 @@ func (fdr *FileData) printListDir(prev string) {
             fd.printListDir(next)
         } else {
             output := fmt.Sprintf("%s%s%s%s%s", prev, curr, fd.color, fd.fileName, Reset)
-            fillN := ScreenFileSpacing - getStringLen(output)
-            fmt.Printf("%s %s | %s | %9d\n", output, fillWith("-", fillN), fd.modTime, fd.size)
+            fillN := screenFileSpacing - utils.GetStringLen(output)
+            fmt.Printf("%s %s | %s | %9d\n", output, utils.FillWith("-", fillN), fd.modTime, fd.size)
         }
     }
 }
