@@ -1,11 +1,12 @@
 package lstree
 
 import (
+    "runtime"
     "regexp"
     "time"
 )
 
-const (
+var (
     Reset  = "\033[0m"
     Red    = "\033[31m"
     Green  = "\033[32m"
@@ -16,6 +17,23 @@ const (
     Gray   = "\033[37m"
     White  = "\033[97m"
 )
+
+func init() {
+	if runtime.GOOS == "windows" {
+		Reset  = ""
+		Red    = ""
+		Green  = ""
+		Yellow = ""
+		Blue   = ""
+		Purple = ""
+		Cyan   = ""
+		Gray   = ""
+		White  = ""
+
+        ColorFileFiltered = [...]string{Gray, Green, Yellow, Blue, Purple, Cyan, White}
+        ColorFolder = Red
+    }
+}
 
 var (
     ColorFileFiltered = [...]string{Gray, Green, Yellow, Blue, Purple, Cyan, White}
